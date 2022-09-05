@@ -6,6 +6,7 @@ This script can be used to capture logs from Linux or Windows based systems and 
 
 Follow the steps given in Usage section to run the script. 
 
+Notice that upon execution logs captured from each server will be generated in same location where script is executed. Also credentials can be modified to suit your requirements inside the script. 
 ## Usage ##
 
 ### Displaying help page of script ###
