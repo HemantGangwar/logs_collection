@@ -1,5 +1,11 @@
 # Logs Capture Script
 
+## Description ##
+
+This script can be used to capture logs from Linux or Windows based systems and can be run from either of Operating systems. 
+
+Follow the steps given in Usage section to run the script. 
+
 ## Usage ##
 
 ### Displaying help page of script ###
