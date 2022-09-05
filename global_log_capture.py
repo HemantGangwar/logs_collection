@@ -10,19 +10,20 @@ import paramiko, os, argparse, time
 
 ''' Defining a help page function '''
 
-def help_page():
-    # Create the parser
-    documentation = argparse.ArgumentParser()
-    # Add an argument
-    documentation.add_argument("-f", "--filename", type=str, help="[OPTIONAL] if file containing the hostlist")
-    documentation.add_argument("-n", "--nodename", type=str, help="[OPTIONAL] if want to pass directly on a node")
+# Create the parser
+documentation = argparse.ArgumentParser(description='Logs capture mechanism from one or more servers. Choose from one of the below options to perform your operations')
+# Add a mutually exclusive argument
+group = documentation.add_mutually_exclusive_group()
+group.add_argument("-f", "--filename", type=str, help="[OPTIONAL] if file containing the hostlist")
+group.add_argument("-n", "--nodename", type=str, help="[OPTIONAL] if want to pass directly on a node")
     # Parse the argument
-    args = documentation.parse_args()
-    return args
+args = documentation.parse_args()
 
 ''' Defining script execution function '''
 
 def logs_code_execution(server_entry):
+        """ This function will perform the connectivity and logs Captureing from mentioned servers """
+
         python_ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         temphost = server_entry.strip()
         print(f"\n{'='*50}\n Connecting to {temphost}\n{'='*50}")
@@ -105,23 +106,18 @@ ssh_password = "redhat"
 ssh_port = 22
 ssh_server_list = ['dnode1.hemu.com', 'dnode2.hemu.com', 'backbone.hemu.com', 'abc']
 
-''' Calling script argument parsing '''
-
-file_argument = help_page()
-
 ''' Setting up paramiko for connecting to remote hosts '''
 
 python_ssh_client = paramiko.SSHClient()
 python_ssh_client.load_system_host_keys()
 
-if file_argument == 'args.filename':
-    with open(file_argument,"rU") as serverlist:
+if (args.filename):
+    with open(args.filename,"rU") as serverlist:
         for server_entry in serverlist.readlines():
             logs_code_execution(server_entry)
     serverlist.close()
-elif file_argument == 'args.nodename':
-    server_list = 'args.nodename'
-    logs_code_execution(server_list)
+elif (args.nodename):
+    logs_code_execution(args.nodename)
 else:
     for server_entry in ssh_server_list:
         logs_code_execution(server_entry)
