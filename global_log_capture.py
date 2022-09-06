@@ -2,11 +2,12 @@
 
 # Author: Hemant Gangwar
 # Role: Log capture script to gather logs from various systems
+# Dated: Some relaxed day in 2022
 
 
 # Importing required Libraries
-import shutup;shutup.please()
-import paramiko, os, argparse, time
+#import shutup;shutup.please()
+import paramiko, os, argparse, time, getpass
 
 ''' Defining a help page function '''
 
@@ -16,7 +17,7 @@ documentation = argparse.ArgumentParser(description='Logs capture mechanism from
 group = documentation.add_mutually_exclusive_group()
 group.add_argument("-f", "--filename", type=str, help="[OPTIONAL] if file containing the hostlist")
 group.add_argument("-n", "--nodename", type=str, help="[OPTIONAL] if want to pass directly on a node")
-    # Parse the argument
+# Parse the argument
 args = documentation.parse_args()
 
 ''' Defining script execution function '''
@@ -55,12 +56,12 @@ def logs_code_execution(server_entry):
             # Creating for loop to traverse over commands list #
 
             for command in commands:
-                with open("%s-logs.txt"%temphost, "a") as outLogFile, open("%s-errorFile.txt"%temphost, "a") as outErrorFile:
+                with open("%s-logs.txt"%temphost, "a", encoding="utf-8") as outLogFile, open("%s-errorFile.txt"%temphost, "a", encoding="utf-8") as outErrorFile:
                     print("=" * 20, command, "=" * 20, file=outLogFile)
                     print("=" * 20, command, "=" * 20, file=outErrorFile)
                     print("", file=outLogFile)
 
-                with open("%s-logs.txt"%temphost, "a") as outLogFile, open("%s-errorFile.txt"%temphost, "a") as outErrorFile:
+                with open("%s-logs.txt"%temphost, "a", encoding="utf-8") as outLogFile, open("%s-errorFile.txt"%temphost, "a", encoding="utf-8") as outErrorFile:
                     stdin, stdout, stderr = python_ssh_client.exec_command(command)
                     for line in (stdout):
                         outLogFile.write(str(line))
@@ -101,10 +102,12 @@ commands = [
 
 ''' Defining user variables '''
 
-ssh_user  = "root"
-ssh_password = "redhat"
+ssh_user  = input("UserName: ")
+ssh_password = getpass.getpass()
 ssh_port = 22
-ssh_server_list = ['dnode1.hemu.com', 'dnode2.hemu.com', 'backbone.hemu.com', 'abc']
+ssh_server_list = ['dnode1.hemu.com', 'dnode2.hemu.com']
+
+start_time = time.localtime()
 
 ''' Setting up paramiko for connecting to remote hosts '''
 
@@ -123,6 +126,12 @@ else:
         logs_code_execution(server_entry)
 
 python_ssh_client.close()
+
+stop_time = time.localtime()
+
+# Calculation between times
+difference = time.mktime(stop_time) - time.mktime(start_time)
+print(f"Total time elapsed: {difference} seconds")
 
 
 
