@@ -7,7 +7,7 @@
 
 
 # Importing required Libraries
-#import shutup;shutup.please()
+import shutup;shutup.please()
 import paramiko, os, argparse, time, getpass
 
 ''' Defining a help page function '''
@@ -116,7 +116,7 @@ python_ssh_client = paramiko.SSHClient()
 python_ssh_client.load_system_host_keys()
 
 if (args.filename):
-    with open(args.filename,"rU") as serverlist:
+    with open(args.filename,"r+") as serverlist:
         for server_entry in serverlist.readlines():
             logs_code_execution(server_entry)
     serverlist.close()
