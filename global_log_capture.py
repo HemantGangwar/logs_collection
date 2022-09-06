@@ -3,6 +3,7 @@
 # Author: Hemant Gangwar
 # Role: Log capture script to gather logs from various systems
 # Dated: Some relaxed day in 2022
+# Note: Please ensure that the servers credentials should be same in order to have a successful execution.
 
 
 # Importing required Libraries

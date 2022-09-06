@@ -6,7 +6,16 @@ This script can be used to capture logs from Linux or Windows based systems and 
 
 Follow the steps given in Usage section to run the script. 
 
-Notice that upon execution logs captured from each server will be generated in same location where script is executed. Also credentials can be modified to suit your requirements inside the script. 
+1. Upon execution logs captured from each server will be generated in same location where script is executed. 
+2. 2 Files will be created for each server logs and the errors captured.
+3. Also a file 'nodes_unreachable.txt' will be created containing list of unreachable nodes.
+4. Total time taken for script to be executed will be displayed.
+
+##* For fetching logs from Windows Client *##
+
+Deploy openssh on Windows first: https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell
+
+
 ## Usage ##
 
 ### Displaying help page of script ###
@@ -15,12 +24,14 @@ Notice that upon execution logs captured from each server will be generated in s
 
 ### Invoking script with list of servers stored in a file ###
 
-![image](https://user-images.githubusercontent.com/38517925/188445567-693567f1-dbb1-458e-b096-8ef1f68ec969.png)
+![image](https://user-images.githubusercontent.com/38517925/188544517-f24f6240-c209-4c1e-8da1-f78961f33118.png)
+
+![image](https://user-images.githubusercontent.com/38517925/188544548-9c510b5f-43b2-4907-9490-8c9fd76f2f56.png)
 
 ### Executing script on single host ###
 
-![image](https://user-images.githubusercontent.com/38517925/188445710-d5b0fa2f-0ea3-4bad-b65f-31d41bd6f3ef.png)
+![image](https://user-images.githubusercontent.com/38517925/188544576-933ac710-ddfb-4341-b908-dbd4bebcb56b.png)
 
 ### Executing over list of host mentioned inside script itself ###
 
-![image](https://user-images.githubusercontent.com/38517925/188445886-3e6dfa67-467c-417f-9f7c-cd0efd7b3267.png)
+![image](https://user-images.githubusercontent.com/38517925/188544689-c3f8a22e-666d-49f5-a4a7-6a307d63f140.png)
