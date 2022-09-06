@@ -6,7 +6,7 @@
 
 
 # Importing required Libraries
-#import shutup;shutup.please()
+import shutup;shutup.please()
 import paramiko, os, argparse, time, getpass
 
 ''' Defining a help page function '''
@@ -42,7 +42,7 @@ def logs_code_execution(server_entry):
 
         try:
 
-            python_ssh_client.connect(temphost, port=ssh_port, username=ssh_user, password=ssh_password)
+            python_ssh_client.connect(temphost, port=ssh_port, username=ssh_user, password=ssh_password, banner_timeout=200, timeout=1500)
 
         except:
 
@@ -75,7 +75,10 @@ def logs_code_execution(server_entry):
 commands = [
     "uname -a",
     "df -h",
-    "date",
+    "hostname",
+    "ifconfig /all",
+    "ver",
+    "net START",
     "cat /etc/motd",
     "/usr/sbin/vmtoolsd -v",
     "/usr/bin/vmware-toolbox-cmd -v",
@@ -115,7 +118,7 @@ python_ssh_client = paramiko.SSHClient()
 python_ssh_client.load_system_host_keys()
 
 if (args.filename):
-    with open(args.filename,"rU") as serverlist:
+    with open(args.filename,"r+") as serverlist:
         for server_entry in serverlist.readlines():
             logs_code_execution(server_entry)
     serverlist.close()
