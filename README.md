@@ -11,7 +11,7 @@ Follow the steps given in Usage section to run the script.
 3. Also a file 'nodes_unreachable.txt' will be created containing list of unreachable nodes.
 4. Total time taken for script to be executed will be displayed.
 
-##* For fetching logs from Windows Client *##
+## For fetching logs from Windows Client ##
 
 Deploy openssh on Windows first: https://docs.microsoft.com/en-us/windows-server/administration/openssh/openssh_install_firstuse?tabs=powershell
 
