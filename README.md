@@ -35,3 +35,8 @@ Deploy openssh on Windows first: https://docs.microsoft.com/en-us/windows-server
 ### Executing over list of host mentioned inside script itself ###
 
 ![image](https://user-images.githubusercontent.com/38517925/188544689-c3f8a22e-666d-49f5-a4a7-6a307d63f140.png)
+
+### Executing command on Windows EC2 from Linux ###
+
+![image](https://user-images.githubusercontent.com/38517925/188575435-f0e1a426-a50f-4c22-8031-d24c760b3dbe.png)
+
