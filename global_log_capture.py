@@ -110,31 +110,33 @@ ssh_password = getpass.getpass()
 ssh_port = 22
 ssh_server_list = ['dnode1.hemu.com', 'dnode2.hemu.com']
 
-start_time = time.localtime()
+if __name__=='__main__':
 
-''' Setting up paramiko for connecting to remote hosts '''
+    start_time = time.localtime()
 
-python_ssh_client = paramiko.SSHClient()
-python_ssh_client.load_system_host_keys()
+    ''' Setting up paramiko for connecting to remote hosts '''
 
-if (args.filename):
-    with open(args.filename,"r+") as serverlist:
-        for server_entry in serverlist.readlines():
+    python_ssh_client = paramiko.SSHClient()
+    python_ssh_client.load_system_host_keys()
+
+    if (args.filename):
+        with open(args.filename,"r+") as serverlist:
+            for server_entry in serverlist.readlines():
+                logs_code_execution(server_entry)
+        serverlist.close()
+    elif (args.nodename):
+        logs_code_execution(args.nodename)
+    else:
+        for server_entry in ssh_server_list:
             logs_code_execution(server_entry)
-    serverlist.close()
-elif (args.nodename):
-    logs_code_execution(args.nodename)
-else:
-    for server_entry in ssh_server_list:
-        logs_code_execution(server_entry)
 
-python_ssh_client.close()
+    python_ssh_client.close()
 
-stop_time = time.localtime()
+    stop_time = time.localtime()
 
-# Calculation between times
-difference = time.mktime(stop_time) - time.mktime(start_time)
-print(f"Total time elapsed: {difference} seconds")
+    # Calculation between times
+    difference = time.mktime(stop_time) - time.mktime(start_time)
+    print(f"Total time elapsed: {difference} seconds")
 
 
 
